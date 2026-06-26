@@ -41,7 +41,7 @@ app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
 if (isProduction && fs.existsSync(DIST_DIR)) {
   app.use(express.static(DIST_DIR))
   // SPA fallback: serve index.html for any non-API route
-  app.get('*', (_req, res) => {
+  app.use((_req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'))
   })
 }
